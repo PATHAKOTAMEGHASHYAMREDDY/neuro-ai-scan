@@ -2,41 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Medical AI Design System - Professional & Trustworthy */
 
 @layer base {
   :root {
+    /* Core Brand Colors */
+    --primary: 211 100% 45%;        /* Medical blue - trust & professionalism */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 211 100% 65%;   /* Lighter blue for glows */
+    
+    --secondary: 189 85% 55%;       /* Medical teal - innovation */
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 189 100% 75%;         /* Bright teal - highlights */
+    --accent-foreground: 211 100% 15%;
+    
+    /* Neutral System */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 222 47% 11%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --card-foreground: 222 47% 11%;
+    
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 25% 45%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 211 100% 45%;
+    
+    /* Medical Semantic Colors */
+    --success: 142 71% 45%;         /* Medical green */
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 45 93% 47%;          /* Medical amber */
+    --warning-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Advanced Design Tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    
+    /* Shadows & Effects */
+    --shadow-soft: 0 4px 6px -1px hsl(var(--primary) / 0.1);
+    --shadow-medium: 0 10px 15px -3px hsl(var(--primary) / 0.15);
+    --shadow-large: 0 25px 50px -12px hsl(var(--primary) / 0.25);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+    
+    /* Animation System */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +120,86 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
   }
+}
+
+@layer components {
+  /* Medical Landing Components */
+  .medical-navbar {
+    @apply sticky top-0 z-50 backdrop-blur-xl bg-background/95 border-b border-border shadow-soft;
+  }
+  
+  .hero-gradient {
+    background: var(--gradient-primary);
+    @apply relative overflow-hidden;
+  }
+  
+  .hero-glow::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-primary-glow/20 via-transparent to-accent/20 animate-pulse;
+  }
+  
+  .medical-card {
+    @apply bg-card border border-border rounded-lg shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-2;
+  }
+  
+  .medical-button {
+    @apply inline-flex items-center gap-2 px-6 py-3 font-semibold rounded-lg transition-all duration-300;
+  }
+  
+  .medical-button-primary {
+    @apply medical-button bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-glow hover:-translate-y-1;
+  }
+  
+  .medical-button-secondary {
+    @apply medical-button border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
+  }
+  
+  .stats-glow {
+    @apply relative;
+  }
+  
+  .stats-glow::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/30 via-secondary/20 to-accent/30 animate-pulse;
+  }
+}
+
+/* Advanced Medical Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(-5px) rotate(-1deg); }
+}
+
+@keyframes slideInFromLeft {
+  0% { opacity: 0; transform: translateX(-50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromRight {
+  0% { opacity: 0; transform: translateX(50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes medicalPulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.7); }
+  70% { box-shadow: 0 0 0 10px hsl(var(--primary) / 0); }
+}
+
+@keyframes brainScan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
